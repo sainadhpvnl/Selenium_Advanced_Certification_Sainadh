@@ -1,14 +1,8 @@
 
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.Status;
-import com.aventstack.extentreports.reporter.ExtentSparkReporter;
-import com.aventstack.extentreports.reporter.JsonFormatter;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
@@ -22,7 +16,7 @@ import java.time.Duration;
 import java.util.HashMap;
 import java.util.Set;
 
-public class TestScenario {
+public class TestScenario_Windows {
 //    public  static void main(String[] args){{
      public static String username = System.getenv("LT_USERNAME");
     public static String access_key = System.getenv("LT_ACCESS_KEY");
@@ -32,14 +26,50 @@ public class TestScenario {
 
     @BeforeClass
     public void setUp() throws Exception {
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("browserName", "Chrome");
-        capabilities.setCapability("version", "128");
-        capabilities.setCapability("platform", "Windows 10"); // If this cap isn't specified, it will just get the any available one
-        capabilities.setCapability("build", "<BrandName />SampleApp");
-        capabilities.setCapability("name", "<BrandName />JavaSample");
+//        DesiredCapabilities capabilities = new DesiredCapabilities();
+//        capabilities.setCapability("browserName", "Chrome");
+//        capabilities.setCapability("version", "128");
+//        capabilities.setCapability("platform", "Windows 10"); // If this cap isn't specified, it will just get the any available one
+//        capabilities.setCapability("build", "<BrandName />SampleApp");
+//        capabilities.setCapability("name", "<BrandName />JavaSample");
+        HashMap<String, Object> ltOptions = new HashMap<>();
+        ltOptions.put("build", "[HyperExecute - 1] Demonstration of the TestNG Framework");
+        ltOptions.put("name", "[HyperExecute - 1] Demonstration of the TestNG Framework");
+        ltOptions.put("tunnel", false);
+        ltOptions.put("network", true);
+        ltOptions.put("console", true);
+        ltOptions.put("visual", true);
+        ltOptions.put("selenium_version", "4.24.0");
+        ltOptions.put("w3c", true);
+
+        // Accessibility options
+        ltOptions.put("accessibility", true);
+        ltOptions.put("accessibility.wcagVersion", "wcag21a");
+        ltOptions.put("accessibility.bestPractice", false);
+        ltOptions.put("accessibility.needsReview", true);
+        // Use browser-specific Options class for W3C compliance
+        MutableCapabilities browserOptions;
+        String browser="Chrome",version="128",platformName="Windows 10";
+
+        switch (browser.toLowerCase()) {
+            case "chrome":
+                browserOptions = new ChromeOptions();
+                break;
+            case "microsoftedge":
+            case "edge":
+                browserOptions = new EdgeOptions();
+                break;
+            case "firefox":
+                browserOptions = new FirefoxOptions();
+                break;
+            default:
+                browserOptions = new ChromeOptions();
+        }
+        browserOptions.setCapability("browserVersion", version);
+        browserOptions.setCapability("platformName", platformName);
+        browserOptions.setCapability("LT:Options", ltOptions);
         try {
-            driver = new RemoteWebDriver(new URL("https://" + username + ":" + access_key + gridURL), capabilities);
+            driver = new RemoteWebDriver(new URL("https://" + username + ":" + access_key + gridURL), browserOptions);
         } catch (MalformedURLException e) {
             System.out.println("Invalid grid URL");
         } catch (Exception e) {
