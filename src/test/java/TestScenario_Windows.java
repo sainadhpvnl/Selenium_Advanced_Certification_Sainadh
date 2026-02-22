@@ -31,8 +31,8 @@ public class TestScenario_Windows {
     @BeforeClass
     public void setUp() throws Exception {
         HashMap<String, Object> ltOptions = new HashMap<>();
-        ltOptions.put("build", "Test Scenario Execution-Windows ");
-        ltOptions.put("name", "Windows OS Multi Browser Execution");
+        ltOptions.put("build", "LamdaTest-  Test Scenario Execution 2");
+        ltOptions.put("name", "Multi Browser Execution 2");
         ltOptions.put("tunnel", false);
         ltOptions.put("network", true);
         ltOptions.put("console", true);
@@ -89,7 +89,7 @@ public class TestScenario_Windows {
 
 //        1. Navigate to https://www.testmuai.com/.
         driver.get("https://www.testmuai.com/");
-        driver.manage().window().maximize();
+//        driver.manage().window().maximize();
         test1.log(Status.PASS, "URL is opened");
         waitForPageLoad(driver);
         test1.log(Status.PASS, "Wait created");

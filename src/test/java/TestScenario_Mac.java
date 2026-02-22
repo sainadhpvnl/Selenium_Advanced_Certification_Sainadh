@@ -91,7 +91,7 @@ public class TestScenario_Mac {
 
 //        1. Navigate to https://www.testmuai.com/.
         driver.get("https://www.testmuai.com/");
-        driver.manage().window().maximize();
+//        driver.manage().window().maximize();
         test1.log(Status.PASS, "URL is opened");
         waitForPageLoad(driver);
         test1.log(Status.PASS, "Wait created");
