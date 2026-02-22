@@ -11,10 +11,10 @@ concurrency: 1
 parallelism: 1
 
 matrix:
-  os: [win,mac]
+  os: [ win,mac ]
 
-env:
-  TARGET_OS: Windows 10
+#env:
+#  TARGET_OS: Windows 10
 
 runtime:
   language: java
@@ -28,7 +28,7 @@ cacheDirectories:
 pre:
   - mvn -Dmaven.repo.local=./.m2 dependency:resolve -Dmaven.test.skip=true clean install
 
-report : true
+report: true
 
 mergeArtifacts: true
 
@@ -40,13 +40,13 @@ path:
 testDiscovery:
   type: raw
   mode: dynamic
-#  command: grep 'test name' testng.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/\x3e//g'
-#  command: grep -rl '@Test' src/test/java/*.java | awk -F'/' '{print substr($NF,1,length($NF)-5)}'
-#    grep 'test name' xml/testng_win11.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/\x3e//g'
+  #  command: grep 'test name' testng.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/\x3e//g'
+  #  command: grep -rl '@Test' src/test/java/*.java | awk -F'/' '{print substr($NF,1,length($NF)-5)}'
+  #    grep 'test name' xml/testng_win11.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/\x3e//g'
 
   winCommand: |
     grep -rl '@Test' src/test/java/TestScenario_Windows.java | awk -F'/' '{print substr($NF,1,length($NF)-5)}'
-#    grep 'test name' xml/testng_win.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/\x3e//g'
+  #    grep 'test name' xml/testng_win.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/\x3e//g'
 
   macCommand: |
     grep -rl '@Test' src/test/java/TestScenario_Mac.java | awk -F'/' '{print substr($NF,1,length($NF)-5)}'
@@ -66,4 +66,4 @@ linuxTestRunnerCommand: mvn test -Dplatname=linux -Dmaven.repo.local=./.m2 depen
 #post:
 #  - cat yaml/testng_hyperexecute_hybrid_sample_orginal.yaml
 
-jobLabel: [selenium-testng, hybrid]
+jobLabel: [ selenium-testng, hybrid ]
