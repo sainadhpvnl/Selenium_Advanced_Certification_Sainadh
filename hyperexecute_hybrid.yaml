@@ -1,0 +1,69 @@
+version: 0.1
+globalTimeout: 150
+testSuiteTimeout: 150
+testSuiteStep: 150
+
+runson: ${matrix.os}
+autosplit: true
+maxRetries: 1
+retryOnFailure: true
+concurrency: 1
+parallelism: 1
+
+matrix:
+  os: [win,mac]
+
+env:
+  TARGET_OS: Windows 10
+
+runtime:
+  language: java
+  version: 11
+
+#Dependency caching for Windows
+cachekey: '{{checksum "pom.xml"}}'
+cacheDirectories:
+  - .m2
+
+pre:
+  - mvn -Dmaven.repo.local=./.m2 dependency:resolve -Dmaven.test.skip=true clean install
+
+report : true
+
+mergeArtifacts: true
+
+uploadArtefacts:
+  - name: Surefire-Report
+path:
+  - target/surefire-reports/**
+
+testDiscovery:
+  type: raw
+  mode: dynamic
+#  command: grep 'test name' testng.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/\x3e//g'
+#  command: grep -rl '@Test' src/test/java/*.java | awk -F'/' '{print substr($NF,1,length($NF)-5)}'
+#    grep 'test name' xml/testng_win11.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/\x3e//g'
+
+  winCommand: |
+    grep -rl '@Test' src/test/java/TestScenario_Windows.java | awk -F'/' '{print substr($NF,1,length($NF)-5)}'
+#    grep 'test name' xml/testng_win.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/\x3e//g'
+
+  macCommand: |
+    grep -rl '@Test' src/test/java/TestScenario_Mac.java | awk -F'/' '{print substr($NF,1,length($NF)-5)}'
+#    grep 'test name' xml/testng_mac.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/\x3e//g'
+
+#  linuxCommand: |
+#    grep 'test name' xml/testng_linux.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/\x3e//g'
+
+
+
+#testRunnerCommand: mvn test `-Dplatname=win `-Dmaven.repo.local=./.m2 dependency:resolve `-DselectedTests=$test
+winTestRunnerCommand: mvn test `-Dplatname=win `-Dmaven.repo.local=./.m2 dependency:resolve `-DselectedTests=$test
+linuxTestRunnerCommand: mvn test -Dplatname=linux -Dmaven.repo.local=./.m2 dependency:resolve -DselectedTests=$test
+
+#macTestRunnerCommand: mvn test -Dplatname=mac -Dmaven.repo.local=./.m2 dependency:resolve -DselectedTests=$test
+
+#post:
+#  - cat yaml/testng_hyperexecute_hybrid_sample_orginal.yaml
+
+jobLabel: [selenium-testng, hybrid]
