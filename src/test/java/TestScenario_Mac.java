@@ -48,8 +48,8 @@ public class TestScenario_Mac {
         ltOptions.put("accessibility.needsReview", true);
         // Use browser-specific Options class for W3C compliance
         MutableCapabilities browserOptions;
-        String browser = "edge", version = "127", platformName = "MacOS Ventura";
-
+        String browser = "edge", version = "127", platformName = "macOS Ventura";
+        System.out.println("Executing in MAC OS - EDGE Browser");
         switch (browser.toLowerCase()) {
             case "chrome":
                 browserOptions = new ChromeOptions();
@@ -64,6 +64,7 @@ public class TestScenario_Mac {
             default:
                 browserOptions = new ChromeOptions();
         }
+
         browserOptions.setCapability("browserVersion", version);
         browserOptions.setCapability("platformName", platformName);
         browserOptions.setCapability("LT:Options", ltOptions);

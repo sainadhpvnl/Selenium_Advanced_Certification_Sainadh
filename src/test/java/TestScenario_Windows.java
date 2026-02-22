@@ -48,7 +48,7 @@ public class TestScenario_Windows {
         // Use browser-specific Options class for W3C compliance
         MutableCapabilities browserOptions;
         String browser = "Chrome", version = "128", platformName = "Windows 10";
-
+        System.out.println("Executing in Windows 10 OS - CHROME Browser");
         switch (browser.toLowerCase()) {
             case "chrome":
                 browserOptions = new ChromeOptions();
