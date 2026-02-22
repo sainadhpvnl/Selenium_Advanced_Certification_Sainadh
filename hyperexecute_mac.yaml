@@ -9,12 +9,15 @@ maxRetries: 1
 retryOnFailure: true
 concurrency: 1
 parallelism: 1
+#mac_parallelism: 1
 
 matrix:
-  os: [ win,mac ]
+  os: [ mac ]
+  version: [ "latest" ]
+  browser: [ Chrome,Edge ]
 
-#env:
-#  TARGET_OS: Windows 10
+env:
+  TARGET_OS: macOS Ventura
 
 runtime:
   language: java
@@ -44,8 +47,8 @@ testDiscovery:
   #  command: grep -rl '@Test' src/test/java/*.java | awk -F'/' '{print substr($NF,1,length($NF)-5)}'
   #    grep 'test name' xml/testng_win11.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/\x3e//g'
 
-  winCommand: |
-    grep -rl '@Test' src/test/java/TestScenario_Windows.java | awk -F'/' '{print substr($NF,1,length($NF)-5)}'
+#  winCommand: |
+#    grep -rl '@Test' src/test/java/TestScenario_Windows.java | awk -F'/' '{print substr($NF,1,length($NF)-5)}'
   #    grep 'test name' xml/testng_win.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/\x3e//g'
 
   macCommand: |
@@ -58,8 +61,8 @@ testDiscovery:
 
 
 testRunnerCommand:
-  mvn test `-Dplatname=win `-Dmaven.repo.local=./.m2 dependency:resolve `-DselectedTests=$test
   mvn test `-Dplatname=mac `-Dmaven.repo.local=./.m2 dependency:resolve `-DselectedTests=$test
+#  mvn test `-Dplatname=mac `-Dmaven.repo.local=./.m2 dependency:resolve `-DselectedTests=$test
 #winTestRunnerCommand: mvn test `-Dplatname=win `-Dmaven.repo.local=./.m2 dependency:resolve `-DselectedTests=$test
 #linuxTestRunnerCommand: mvn test -Dplatname=linux -Dmaven.repo.local=./.m2 dependency:resolve -DselectedTests=$test
 
@@ -68,4 +71,4 @@ testRunnerCommand:
 #post:
 #  - cat yaml/testng_hyperexecute_hybrid_sample_orginal.yaml
 
-jobLabel: [ selenium-testng, hybrid ]
+jobLabel: [ selenium-testng, mac ]

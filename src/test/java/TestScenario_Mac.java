@@ -32,8 +32,8 @@ public class TestScenario_Mac {
     @BeforeClass
     public void setUp() throws Exception {
         HashMap<String, Object> ltOptions = new HashMap<>();
-        ltOptions.put("build", "Test Scenario Execution 2");
-        ltOptions.put("name", "Mac OS and Edge Browser Execution 2");
+        ltOptions.put("build", "LamdaTest-  Test Scenario Execution build- 2");
+        ltOptions.put("name", "Multi Browser Execution Run- 2");
         ltOptions.put("tunnel", false);
         ltOptions.put("network", true);
         ltOptions.put("console", true);

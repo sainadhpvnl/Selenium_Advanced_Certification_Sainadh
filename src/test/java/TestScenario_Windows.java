@@ -31,8 +31,8 @@ public class TestScenario_Windows {
     @BeforeClass
     public void setUp() throws Exception {
         HashMap<String, Object> ltOptions = new HashMap<>();
-        ltOptions.put("build", "LamdaTest-  Test Scenario Execution 2");
-        ltOptions.put("name", "Multi Browser Execution 2");
+        ltOptions.put("build", "LamdaTest-  Test Scenario Execution build- 3");
+        ltOptions.put("name", "Multi Browser Execution Run- 3 ");
         ltOptions.put("tunnel", false);
         ltOptions.put("network", true);
         ltOptions.put("console", true);
