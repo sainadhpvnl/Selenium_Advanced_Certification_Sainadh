@@ -31,8 +31,8 @@ public class TestScenario_Windows {
     @BeforeClass
     public void setUp() throws Exception {
         HashMap<String, Object> ltOptions = new HashMap<>();
-        ltOptions.put("build", "Test Scenario Execution 1");
-        ltOptions.put("name", "Windows OS and Chrome Browser Execution 1");
+        ltOptions.put("build", "Test Scenario Execution-LamdaTest");
+        ltOptions.put("name", "Windows OS Multi Browser Execution 1");
         ltOptions.put("tunnel", false);
         ltOptions.put("network", true);
         ltOptions.put("console", true);
@@ -47,8 +47,8 @@ public class TestScenario_Windows {
         ltOptions.put("accessibility.needsReview", true);
         // Use browser-specific Options class for W3C compliance
         MutableCapabilities browserOptions;
-        String browser = "Chrome", version = "128", platformName = "Windows 10";
-        System.out.println("Executing in Windows 10 OS - CHROME Browser");
+        String browser = "Chrome", version = "dev", platformName = "Windows 10";
+//        System.out.println("Executing in Windows 10 OS - CHROME Browser");
         switch (browser.toLowerCase()) {
             case "chrome":
                 browserOptions = new ChromeOptions();
