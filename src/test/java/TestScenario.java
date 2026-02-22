@@ -1,4 +1,4 @@
-package test.java;
+
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
@@ -33,9 +33,9 @@ public class TestScenario {
     @BeforeClass
     public void setUp() throws Exception {
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("browserName", "chrome");
-        capabilities.setCapability("version", "70.0");
-        capabilities.setCapability("platform", "win10"); // If this cap isn't specified, it will just get the any available one
+        capabilities.setCapability("browserName", "Chrome");
+        capabilities.setCapability("version", "128");
+        capabilities.setCapability("platform", "Windows 10"); // If this cap isn't specified, it will just get the any available one
         capabilities.setCapability("build", "<BrandName />SampleApp");
         capabilities.setCapability("name", "<BrandName />JavaSample");
         try {
